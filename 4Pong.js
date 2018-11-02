@@ -39,24 +39,22 @@ class Ball extends Rectangle{
 		var prevy=this.y;
 		var prevx=this.x;
 		
-		this.y+=yVector;
-		this.x+=xVector
+		this.y+= ; //cause movement using vectors
+		this.x+= ;
 		
 		for(var i=0;i<rectArray.length;i++)
 		{
 			if(rectArray[i]!=this && checkCollision(this,rectArray[i]))
 			{
 				if(rectArray[i] instanceof VertRectangle){			//makes the ball go the other direction horizontally if hitting a vertical rectangle
-					xVector*= -1;
+					//changes direction of x-vector
 				}
 				else if (rectArray[i] instanceof HorizRectangle){	//makes the ball go the other direction vertically if hitting a horizontal rectangle
-					yVector*= -1;
+					//changes direction of y-vector
 				}
 				hits += 1;
-				if(hits >= 1){
-					xVector*=1.1;
-					yVector*=1.1;
-				}
+				xVector = ;
+				yVector = ;	//increases the speed of the ball by 10% with each hit
 			}
 		}//end of for
 	}
@@ -134,7 +132,7 @@ var hRect1=new HorizRectangle(browserWidth*0.375,10,browserWidth*0.25,10);					/
 var vRect1=new VertRectangle(5,browserHeight*0.375,10,browserHeight*0.25);					//makes vertical paddle with a height 1/4 of the screen height
 var hRect2=new HorizRectangle(browserWidth*0.375,browserHeight-20,browserWidth*0.25,10);	//makes horizontal paddle with a width 1/4 of the screen width
 var vRect2=new VertRectangle(browserWidth-15,browserHeight*0.375,10,browserHeight*0.25);	//makes vertical paddle with a height 1/4 of the screen height
-var ball = new Ball(browserWidth*0.5,browserHeight*0.5, browserWidth*0.01, browserWidth*0.01);
+var ball = ; //create the ball, starting at the middle of the screen
 var rectArray=[];
 rectArray.push(hRect1);
 rectArray.push(vRect1);
@@ -160,7 +158,7 @@ window.onload = function()
 function main()
 {
 	//clears screen
-    ctx.fillStyle = "white";
+    	ctx.fillStyle = "white";
 	ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
 	
 	//update and render
@@ -265,11 +263,8 @@ function checkTeam2Score(){	//checks if team 2 scored
 	return(ball.x < 0 || ball.y < 0)
 }
 
-function reset(){	//resets if a point is scored
-	ball.x = (browserWidth * 0.5);
-	ball.y = (browserHeight * 0.5);
-	hits = 0;
-	createRandomDirection();
+function reset(){	//resets if a point is scored, restarts the ball in the center, sets hits to 0, and creates another random
+			//direction for the ball
 }
 
 function createRandomDirection(){	//creates random direction for ball to start in
